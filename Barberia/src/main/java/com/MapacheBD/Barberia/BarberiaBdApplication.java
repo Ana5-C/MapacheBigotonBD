@@ -9,5 +9,4 @@ public class BarberiaBdApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BarberiaBdApplication.class, args);
 	}
-
 }
