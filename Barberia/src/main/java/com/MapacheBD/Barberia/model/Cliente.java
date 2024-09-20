@@ -15,9 +15,8 @@ public class Cliente {
     private String contrasena;
 
 
-    public Cliente(String nombre, Long telefono, String nombreUsuario, String contrasena) {
+    public Cliente(String nombre, String nombreUsuario, String contrasena) {
         this.nombre = nombre;
-        this.telefono = telefono;
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
     }
