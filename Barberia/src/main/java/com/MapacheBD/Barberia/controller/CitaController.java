@@ -42,13 +42,55 @@ public class CitaController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody Cita newCliente, UriComponentsBuilder ucb){
-        Cita savedCliente = citaRepository.save(newCliente);
+    public ResponseEntity<Void> create(@RequestBody Cita cita, UriComponentsBuilder ucb){
+       Opcional<Cita> citaOptional = citaRepository.findById(cita.getCita().getIdCita);
+       if (!citaOptional.isPresent()){
+        retuResponseEntity.notFound().build();
+       }
+        cita.setCita(citaOptional.get();
+        cita savedCita =citaRepository.save(cita);
         URI uri = ucb
-                .path("cita/{idCita}")
-                .buildAndExpand(savedCliente.getIdCita())
-                .toUri();
+            .path("cita/{idCita}") UriComponentsBuilder
+            .buildAndExpand(savedCita.getIdCita())UriComponents
+            .toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping("/{idCita}")
+    public ResponseEntity<Void> update(@PathVariable Long idCita, @RequestBody Cita cita){
+        Opcional<Cita> citaOptional = citaRepository.findById(cita.getCita().getIdCita);
+        if (!citaOptional.isPresent()){
+            retuResponseEntity.notFound().build();
+        }
+
+        Opcional<Cita> citaOptional = citaRepository.findById(idCita);
+        if (! citaOptional.isPresent()){
+            retuResponseEntity.notFound().build();
+        }
+
+        cita.setCita(citaOptional.get());
+        cita.setCita(citaOptional.get().getIdCita());
+        citaRepository.save(cita);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{idCita}")
+    public ResponseEntity<Void> delete(@PathVariable Long idCita){
+        if(citaRepository.findById(idCita).get() != null){
+            return ResponseEntity.noContent().build();
+        }
+        citaRepository.deleteById(idCita);
+        return ResponseEntity.notFound().build();
+    }
+  // Obtener los servicios de una cita
+
+    @GetMapping("/{idCita}servicios")
+    public ResponseEntity<Iterable<Servicio>> getCitaServicios(@PathVariable integer idCita){
+        Opcional<Cita> citaOptional = citaRepository.findById(idCita);
+        if(!citaOptional.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(citaOptional.get().getServicios());
     }
 
 }
