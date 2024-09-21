@@ -25,9 +25,31 @@ public class CitaController {
     private CitaRepository citaRepository ;
 
     @Autowired
-    private ClienteRepository ClienteRepository;
+    private ServicioRepository ServicioRepository;
 
+    @GetMapping()
+    public ResponseEntity<Iterable<cita>> findAll(){
+        return ResponseEntity.ok(CitaRepository.findAll());
+    }
     
+    @GetMapping("/{idCita}")
+    public ResponseEntity<Cita> findById (@PathVariable integer idCita){
+        Optional<Cita> citaOptional = citaRepository.findById(idCita);
+        if (!citaOptional.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(citaOptional.get());
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> create(@RequestBody Cita newCliente, UriComponentsBuilder ucb){
+        Cita savedCliente = citaRepository.save(newCliente);
+        URI uri = ucb
+                .path("cita/{idCita}")
+                .buildAndExpand(savedCliente.getIdCita())
+                .toUri();
+        return ResponseEntity.created(uri).build();
+    }
 
 }
 
