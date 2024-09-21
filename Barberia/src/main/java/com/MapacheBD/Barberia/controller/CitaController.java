@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.MapacheBD.Barberia.model.Cliente;
-import com.MapacheBD.Barberia.repository.ClienteRepository;
+import com.MapacheBD.Barberia.model.Cita;
+import com.MapacheBD.Barberia.repository.CitaRepository;
 
 @RestController
 @RequestMapping("/cita")
@@ -90,7 +90,7 @@ public class CitaController {
         if(!citaOptional.isPresent()){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(citaOptional.get().getCitaServicios());
+        return ResponseEntity.ok(citaOptional.get().getServicios());
     }
 
 }
