@@ -84,13 +84,13 @@ public class CitaController {
     }
   // Obtener los servicios de una cita
 
-    @GetMapping("/{idCita}servicios")
-    public ResponseEntity<Iterable<Servicio>> getCitaServicios(@PathVariable integer idCita){
+    @GetMapping("/{idCita}/servicios")
+    public ResponseEntity<Iterable<CitaServicio>> getCitaServicios(@PathVariable integer idCita){
         Opcional<Cita> citaOptional = citaRepository.findById(idCita);
         if(!citaOptional.isPresent()){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(citaOptional.get().getServicios());
+        return ResponseEntity.ok(citaOptional.get().getCitaServicios());
     }
 
 }
