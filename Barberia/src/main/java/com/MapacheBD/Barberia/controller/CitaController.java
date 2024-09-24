@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.MapacheBD.Barberia.model.Cita;
-import com.MapacheBD.Barberia.model.Cliente;
 import com.MapacheBD.Barberia.repository.CitaRepository;
 
 @CrossOrigin(origins = "http://localhost:3000/")
