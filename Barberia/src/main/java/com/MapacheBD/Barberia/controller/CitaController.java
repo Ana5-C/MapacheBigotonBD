@@ -25,7 +25,7 @@ public class CitaController {
     private CitaRepository citaRepository ;
 
     @Autowired
-    private ServicioRepository ServicioRepository;
+   // private ServicioRepository ServicioRepository;
 
     @GetMapping()
     public ResponseEntity<Iterable<cita>> findAll(){
