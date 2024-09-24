@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.MapacheBD.Barberia.model.Cita;
+import com.MapacheBD.Barberia.model.CitaServicio;
 import com.MapacheBD.Barberia.repository.CitaRepository;
 
 @RestController
@@ -28,8 +29,8 @@ public class CitaController {
    // private ServicioRepository ServicioRepository;
 
     @GetMapping()
-    public ResponseEntity<Iterable<cita>> findAll(){
-        return ResponseEntity.ok(CitaRepository.findAll());
+    public ResponseEntity<Iterable<Cita>> findAll(){
+        return ResponseEntity.ok(citaRepository.findAll());
     }
     
     @GetMapping("/{idCita}")
@@ -45,7 +46,7 @@ public class CitaController {
     public ResponseEntity<Void> create(@RequestBody Cita cita, UriComponentsBuilder ucb){
        Opcional<Cita> citaOptional = citaRepository.findById(cita.getCita().getIdCita);
        if (!citaOptional.isPresent()){
-        retuResponseEntity.notFound().build();
+        return ResponseEntity.notFound().build();
        }
         cita.setCita(citaOptional.get();
         cita savedCita =citaRepository.save(cita);
@@ -60,12 +61,12 @@ public class CitaController {
     public ResponseEntity<Void> update(@PathVariable Long idCita, @RequestBody Cita cita){
         Opcional<Cita> citaOptional = citaRepository.findById(cita.getCita().getIdCita);
         if (!citaOptional.isPresent()){
-            retuResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();
         }
 
         Opcional<Cita> citaOptional = citaRepository.findById(idCita);
         if (! citaOptional.isPresent()){
-            retuResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();
         }
 
         cita.setCita(citaOptional.get());

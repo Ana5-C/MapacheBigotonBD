@@ -2,6 +2,8 @@ package com.MapacheBD.Barberia.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.*;
 
 @Entity
