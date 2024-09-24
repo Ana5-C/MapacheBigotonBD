@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.MapacheBD.Barberia.model.Cita;
+import com.MapacheBD.Barberia.model.CitaServicio;
 import com.MapacheBD.Barberia.repository.CitaRepository;
 
 @CrossOrigin(origins = "http://localhost:3000/")
@@ -41,8 +42,13 @@ public class CitaController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody Cita newCita, UriComponentsBuilder ucb) {
-        Cita savedCita = citaRepository.save(newCita);
+    public ResponseEntity<Void> create(@RequestBody Cita cita, UriComponentsBuilder ucb){
+       Opcional<Cita> citaOptional = citaRepository.findById(cita.getCita().getIdCita);
+       if (!citaOptional.isPresent()){
+        retuResponseEntity.notFound().build();
+       }
+        cita.setCita(citaOptional.get();
+        cita savedCita =citaRepository.save(cita);
         URI uri = ucb
                 .path("cliente/{idCliente}")
                 .buildAndExpand(savedCita.getIdCita())
@@ -51,14 +57,21 @@ public class CitaController {
     }
 
     @PutMapping("/{idCita}")
-    public ResponseEntity<Void> update(@PathVariable Long idCita, @RequestBody Cita citaAct){
-        Cita citaAnt = citaRepository.findById(idCita).get();
-        if(citaAnt != null){
-            citaAct.setIdCita(citaAnt.getIdCita());
-            citaRepository.save(citaAct);
-            return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> update(@PathVariable Long idCita, @RequestBody Cita cita){
+        Opcional<Cita> citaOptional = citaRepository.findById(cita.getCita().getIdCita);
+        if (!citaOptional.isPresent()){
+            retuResponseEntity.notFound().build();
         }
-        return ResponseEntity.notFound().build();
+
+        Opcional<Cita> citaOptional = citaRepository.findById(idCita);
+        if (! citaOptional.isPresent()){
+            retuResponseEntity.notFound().build();
+        }
+
+        cita.setCita(citaOptional.get());
+        cita.setCita(citaOptional.get().getIdCita());
+        citaRepository.save(cita);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{idCita}")
