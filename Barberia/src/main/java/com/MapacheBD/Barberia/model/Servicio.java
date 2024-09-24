@@ -18,6 +18,9 @@ public class Servicio {
         this.precio = precio;
     }
 
+    @OneToMany(mappedBy = "servicio")
+    List<CitaServicios> CitaServicios;
+
     public Servicio(){
 
     }
