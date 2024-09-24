@@ -1,7 +1,6 @@
 package com.MapacheBD.Barberia.model;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 
 @Entity
 @Table (name="servicio")

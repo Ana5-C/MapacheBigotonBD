@@ -1,10 +1,8 @@
 package com.MapacheBD.Barberia.repository;
 
-import com.MapacheBD.Barberia.model.Cita;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import com.MapacheBD.Barberia.model.Cita;
+
 public interface CitaRepository extends CrudRepository<Cita, Long>{
-
 }
