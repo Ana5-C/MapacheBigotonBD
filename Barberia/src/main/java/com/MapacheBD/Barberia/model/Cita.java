@@ -1,29 +1,30 @@
 package com.MapacheBD.Barberia.model;
 
-
-
 import jakarta.persistence.*;
 
 @Entity
-@Table(name= "cita")
+@Table(name = "cita")
 public class Cita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCita;
     private String nombre;
     private Long telefono;
-    private String descripcion;
     private String fecha;
-    private Long Hora;
-    private Double costo;
+    private String hora;
+    private String descripcion;
+    private double costo;
+    private String nombreBar;
 
-    public Cita(String nombre, String descripcion, String fecha) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.fecha = fecha;
+    public Cita() {
     }
 
-    public Cita(){
+    public Cita(String nombre, String fecha, String hora, String descripcion, String nombreBar) {
+        this.nombre = nombre;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.descripcion = descripcion;
+        this.nombreBar = nombreBar;
     }
 
     public Long getIdCita() {
@@ -50,14 +51,6 @@ public class Cita {
         this.telefono = telefono;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public String getFecha() {
         return fecha;
     }
@@ -66,31 +59,44 @@ public class Cita {
         this.fecha = fecha;
     }
 
-    public Long getHora() {
-        return Hora;
+    public String getHora() {
+        return hora;
     }
 
-    public void setHora(Long hora) {
-        Hora = hora;
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
-    public Double getCosto() {
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public double getCosto() {
         return costo;
     }
 
-    public void setCosto(Double costo) {
+    public void setCosto(double costo) {
         this.costo = costo;
     }
 
-    @Override
-    public String toString() {
-        return "Cita [idCita=" + idCita + ", nombre=" + nombre + ", telefono=" + telefono + ", descripcion="
-                + descripcion + ", fecha=" + fecha + ", Hora=" + Hora + ", costo=" + costo + "]";
+    public String getNombreBar() {
+        return nombreBar;
     }
 
-    
-    
+    public void setNombreBar(String nombreBar) {
+        this.nombreBar = nombreBar;
+    }
 
-    
+
+    @Override
+    public String toString() {
+        return "Cita [idCita=" + idCita + ", nombre=" + nombre + ", telefono=" + telefono + ", fecha=" + fecha
+                + ", hora=" + hora + ", descripcion=" + descripcion + ", costo=" + costo + ", nombreBar=" + nombreBar
+                +  "]";
+    }
 
 }
